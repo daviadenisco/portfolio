@@ -1,0 +1,1179 @@
+/*
+*   Color Scheme
+*/
+$deepblue: #343e4e;
+$trueblue: #87a6bd;
+$ashblue: #9ebdce;
+$gray: #d4d7dd;
+$brown: #8f847f;
+$moonblue: #ccdbe3;
+$white: #ffffff;
+
+/*
+*   Transparent Colors
+*/
+$colorless: rgba(255, 255, 255, 0);
+
+/*
+*   Fonts
+*/
+$changa: "Changa One", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans",
+  "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$raleway: "Raleway", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans",
+  "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+/*
+*   Shadows
+*/
+$dropshadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+$lightshadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+$noshadow: 0 2px 5px rgba(0, 0, 0, 0);
+
+/*
+*   Special Variables for Counting Classes
+*/
+$social_count: 12;
+$tech_count: 20;
+
+/*
+*   Other SCSS Files
+*/
+@import "mixins"; /* Some custom mixins */
+@import "flexbox"; /* Mixins for Cross-browser Flexbox */
+@import "animation"; /* CSS for all the Animations */
+
+/* Set all elements to margin 0, padding 0 and outline none */
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+/* IE: Disable border for anchors and images */
+a img {
+  border: none;
+}
+
+/* Change colors for text highlighting */
+::selection {
+  background: $trueblue;
+  color: $white;
+}
+::-moz-selection {
+  background: $trueblue;
+  color: $white;
+}
+
+/* Body */
+body {
+  font-family: $raleway;
+  background: $deepblue;
+}
+
+/* Set Heading 1 to None - for SEO purposes */
+h1 {
+  display: none;
+}
+
+/* Primary Navigation */
+nav.primary-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 45px;
+  z-index: 10;
+  // @include transition(all ease .5s);
+
+  /* Desktop Navigation */
+  .navlinks {
+    position: absolute;
+    right: 10px;
+    top: 14px;
+    text-align: right;
+    @include transition(all ease 0.5s);
+
+    ul {
+      @include flexbox();
+      @include flex-wrap(wrap);
+      @include justify-content(flex-end);
+      list-style: none;
+      li {
+        text-align: center;
+        @include flex(auto);
+        a {
+          text-decoration: none;
+          font-size: 16px;
+          font-weight: 500;
+          margin-left: 14px;
+          margin-right: 14px;
+          padding: 5px 7px;
+          color: $white;
+          text-shadow: $lightshadow;
+          @include border-radius(5px);
+          @include transition(all ease 0.5s);
+        }
+        /* When navigation is hovered, add background color and font color */
+        a:hover {
+          color: $deepblue;
+          background: $white;
+          text-shadow: $noshadow;
+          @include box-shadow($dropshadow);
+        }
+      }
+    }
+  }
+
+  /* Mobile Navigation Icon */
+  .hamburgerwrapper {
+    position: absolute;
+    right: 15px;
+    top: 8px;
+    @include flexbox();
+    @include flex-wrap(wrap);
+    @include justify-content(flex-end);
+
+    .burgericon {
+      @include flex(auto);
+      position: relative;
+      top: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: $colorless; /* Remove button highlight from touch screen devices */
+
+      p {
+        position: relative;
+        top: 3px;
+        right: 65px;
+        color: $white;
+        font-size: 20px;
+        font-weight: 300;
+        text-shadow: $lightshadow;
+        @include transition(all ease 0.2s);
+      }
+
+      .hamburger {
+        width: 24px;
+        height: 2px;
+        background: $white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        @include transform(translate(-50%,-50%));
+        @include box-shadow($lightshadow);
+        @include transition(all ease 0.2s);
+      }
+      .hamburger:before,
+      .hamburger:after {
+        content: "";
+        position: absolute;
+        width: 24px;
+        height: 2px;
+        background: $white;
+        @include box-shadow($lightshadow);
+        @include transition(all ease 0.2s);
+      }
+      .hamburger:before {
+        top: -7px;
+      }
+      .hamburger:after {
+        top: 7px;
+      }
+    }
+    /* CSS for when the Hamburger is Clicked */
+    .burgericon.active .hamburger {
+      background: none;
+      box-shadow: $noshadow;
+    }
+    .burgericon.active .hamburger:before {
+      top: 0px;
+      @include transform(rotate(45deg));
+    }
+    .burgericon.active .hamburger:after {
+      top: 0px;
+      @include transform(rotate(135deg));
+    }
+  }
+}
+
+/* Mobile Navigation Icon */
+div.mobile-nav {
+  position: fixed;
+  top: 40px;
+  width: 100%;
+  padding-bottom: 35px;
+  background: $trueblue;
+  @include box-shadow($dropshadow);
+  visibility: hidden;
+  z-index: 15;
+
+  ul {
+    @include flexbox();
+    @include flex-wrap(wrap);
+    @include justify-content(flex-end);
+    list-style: none;
+    li {
+      text-align: center;
+      min-width: 100%;
+      // padding: 10px 0px;
+      @include flex(auto);
+      a {
+        display: block;
+        text-decoration: none;
+        color: $white;
+        font-size: 20px;
+        text-shadow: $lightshadow;
+        padding: 10px 0;
+      }
+      a:hover {
+        background: $white;
+        color: $deepblue;
+        & {
+          background: $white;
+          color: $deepblue;
+        }
+      }
+    }
+  }
+}
+/* Hide Mobile Navigation */
+.mobile-nav-active {
+  visibility: visible !important;
+}
+
+/* Hero Section */
+section.hero {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  background: url('./assets/img/background.min.jpg') no-repeat $trueblue;
+  background-position: bottom left;
+  @include background-size(cover);
+  background-attachment: scroll;
+
+  .logo {
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 15px;
+    height: 80px;
+    width: auto;
+  }
+
+  .bannerwrapper {
+    position: relative;
+    top: 45px;
+    height: 555px;
+    width: 96%;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    @include transition(all ease 0.5s);
+
+    .tagline {
+      position: absolute;
+      left: 40px;
+      top: 40px;
+      visibility: hidden;
+      @include transition(all ease 0.5s);
+      z-index: 1;
+
+      h2 {
+        position: relative;
+        font-family: $changa;
+        font-weight: normal;
+        font-size: 130px;
+        line-height: 104px;
+        right: 0px;
+        color: $white;
+        text-align: right;
+        text-shadow: $dropshadow;
+        @include transition(all ease 0.5s);
+        z-index: 1;
+      }
+
+      h4 {
+        margin-top: 5px;
+        margin-right: 5px;
+        position: relative;
+        font-size: 24px;
+        font-weight: normal;
+        color: $white;
+        text-align: right;
+        text-shadow: $dropshadow;
+        @include transition(all ease 0.5s);
+        z-index: 1;
+      }
+    }
+
+    .moon {
+      position: absolute;
+      right: 150px;
+      top: 0px;
+      height: 345px;
+      width: 345px;
+      background-color: $moonblue;
+      visibility: hidden;
+      @include border-radius(100%);
+      @include transition(all ease 0.5s);
+    }
+
+    .wolf {
+      position: absolute;
+      right: 30px;
+      bottom: 0px;
+      height: 377px;
+      width: auto;
+      visibility: hidden;
+      @include transition(all ease 0.5s);
+    }
+  }
+}
+
+/* Hello Section */
+section.hello {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  background-color: $ashblue;
+
+  h2 {
+    position: relative;
+    width: 96%;
+    max-width: 960px;
+    height: 57px;
+    top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 26px;
+    font-weight: 300;
+    text-align: center;
+    color: $deepblue;
+    text-shadow: $lightshadow;
+    @include transition(all ease 0.5s);
+  }
+}
+
+/* Services Section */
+section.services {
+  position: relative;
+  width: 100%;
+  min-height: 280px;
+  padding-bottom: 30px;
+  background-color: $moonblue;
+
+  .row {
+    @include flexbox();
+    @include flex-wrap(wrap);
+
+    position: relative;
+    top: -50px;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 287px;
+    width: 96%;
+    max-width: 960px;
+    @include transition(all ease 0.5s);
+    z-index: 1;
+
+    .column {
+      @include flex(auto);
+      height: 287px;
+      .icon {
+        position: relative;
+        top: 0px;
+        height: 100px;
+        width: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        background-color: $moonblue;
+        @include transition(all ease 0.5s);
+        @include border-radius(100%);
+
+        h4 {
+          font-size: 40px;
+          font-weight: 900;
+          line-height: 100px;
+          text-shadow: $dropshadow;
+          visibility: hidden;
+          @include transition(all ease 0.5s);
+        }
+      }
+
+      h5 {
+        font-size: 25px;
+        font-weight: normal;
+        text-align: center;
+        color: $deepblue;
+        text-shadow: $lightshadow;
+        @include transition(all ease 0.5s);
+      }
+      hr {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 30px;
+        margin-bottom: 20px;
+        width: 60px;
+        text-align: center;
+        color: $deepblue;
+      }
+      p {
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        width: 219px;
+        font-size: 16px;
+        text-align: center;
+        color: $deepblue;
+        @include transition(all ease 0.5s);
+      }
+
+      .development {
+        color: $deepblue;
+        border-color: $deepblue;
+      }
+      .design {
+        color: $brown;
+        border-color: $brown;
+      }
+      .agile {
+        color: $ashblue;
+        border-color: $ashblue;
+      }
+      .people {
+        color: $trueblue;
+        border-color: $trueblue;
+      }
+    }
+  }
+}
+
+/* About Section */
+section.about {
+  position: relative;
+  width: 100%;
+  background-color: $white;
+  @include box-shadow($dropshadow);
+  z-index: 1;
+
+  .aboutwrapper {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include flexbox();
+    @include flex-wrap(wrap);
+    width: 100%;
+    max-width: 1440px;
+    min-width: 320px;
+    @include transition(all ease 0.5s);
+
+    .aboutphoto {
+      position: relative;
+      @include flex(auto);
+      width: 50%;
+      min-height: 440px;
+      max-width: 720px;
+      min-width: 320px;
+      background: url('./assets/img/glenn.png') $moonblue;
+      @include background-size(cover);
+      background-position: 50% 50%;
+      @include transition(all ease 0.5s);
+    }
+
+    .aboutme {
+      position: relative;
+      @include flex(auto);
+      width: 50%;
+      max-width: 720px;
+      min-width: 320px;
+      background: $white;
+      @include transition(all ease 0.5s);
+
+      h2 {
+        margin-top: 30px;
+        margin-left: 5vw;
+        font-family: $changa;
+        font-size: 64px;
+        font-weight: normal;
+        color: $deepblue;
+        text-shadow: $dropshadow;
+        @include transition(all ease 0.5s);
+      }
+      p:first-of-type {
+        margin-top: 5px;
+      }
+      p {
+        display: inline-block;
+        position: relative;
+        margin-left: 5vw;
+        margin-right: 5vw;
+        margin-top: -15px;
+        padding-bottom: 33px;
+        font-size: 19px;
+        font-weight: 300;
+        color: $deepblue;
+        @include transition(all ease 0.5s);
+      }
+    }
+  }
+}
+
+/* Social Section */
+section.social {
+  position: relative;
+  width: 100%;
+  padding-top: 35px;
+  padding-bottom: 60px;
+  background-color: $moonblue;
+
+  .socialwrapper {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 960px;
+
+    h2 {
+      position: relative;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      font-family: $changa;
+      font-size: 64px;
+      font-weight: normal;
+      color: $deepblue;
+      text-align: center;
+      text-shadow: $dropshadow;
+      @include transition(all ease 0.5s);
+    }
+
+    .row:first-of-type {
+      margin-top: 30px;
+    }
+    .row {
+      @include flexbox();
+      @include flex-wrap(wrap);
+      @include justify-content(center);
+      width: 100%;
+      @include transition(all ease 0.5s);
+      .column {
+        @include flex(auto);
+        height: 150px;
+        width: 160px;
+        max-width: 160px;
+        min-width: 160px;
+        background: $gray;
+        text-decoration: none;
+        line-height: 150px;
+        overflow: hidden;
+        @include transition(all ease 0.5s);
+
+        h3 {
+          text-align: center;
+          font-size: 18px;
+          font-weight: 300;
+          @include transition(all ease 0.5s);
+        }
+      }
+      @include box_theme("social");
+
+      /* When a social media icon is hovered, add background color and increase font size */
+      .column:hover {
+        background-color: $gray;
+        h3 {
+          // font-size: 20px;
+          @include transform(scale(1.1));
+          color: $deepblue;
+        }
+      }
+
+      // /* List of Social Media Links */
+      // .social1, .social2, .social5, .social6, .social9, .social10 {
+      //     h3 {
+      //         color: $deepblue;
+      //     }
+      // }
+      // .social3, .social4, .social7, .social8, .social11, .social12 {
+      //     h3 {
+      //         color: $white;
+      //     }
+      // }
+      // .social1, .social5, .social9 {
+      //     background: $ashblue;
+      // }
+      // .social2, .social6, .social10 {
+      //     background: $trueblue;
+      // }
+      // .social3, .social7, .social11 {
+      //     background: $deepblue;
+      // }
+      // .social4, .social8, .social12 {
+      //     background: $brown;
+      // }
+    }
+  }
+}
+
+/* Tech Stack Section */
+section.tech {
+  position: relative;
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 60px;
+  background-color: $white;
+  @include box-shadow($dropshadow);
+  z-index: 1;
+
+  .techwrapper {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 960px;
+
+    h2 {
+      position: relative;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      font-family: $changa;
+      font-size: 64px;
+      font-weight: normal;
+      color: $deepblue;
+      text-align: center;
+      text-shadow: $dropshadow;
+      @include transition(all ease 0.5s);
+    }
+
+    .row:first-of-type {
+      margin-top: 35px;
+    }
+    .row {
+      @include flexbox();
+      @include flex-wrap(wrap);
+      @include justify-content(center);
+      @include transition(all ease 0.5s);
+      width: 100%;
+
+      .column {
+        @include flex(auto);
+        height: 80px;
+        width: 160px;
+        max-width: 160px;
+        margin: 5px;
+        background: $gray;
+        @include box-shadow($dropshadow);
+        @include transition(all ease 0.5s);
+
+        h3 {
+          text-align: center;
+          font-weight: 300;
+          font-size: 20px;
+          line-height: 80px;
+        }
+      }
+      @include box_theme("tech");
+
+      /* List of Tech Stack */
+      // .tech1, .tech2, .tech5, .tech6, .tech9, .tech10 {
+      //     h3 {
+      //         color: $deepblue;
+      //     }
+      // }
+      // .tech3, .tech4, .tech7, .tech8, .tech11, .tech12 {
+      //     h3 {
+      //         color: $white;
+      //     }
+      // }
+      // .tech1, .tech5, .tech9 {
+      //     background: $ashblue;
+      // }
+      // .tech2, .tech6, .tech10 {
+      //     background: $trueblue;
+      // }
+      // .tech3, .tech7, .tech11 {
+      //     background: $deepblue;
+      // }
+      // .tech4, .tech8, .tech12 {
+      //     background: $brown;
+      // }
+    }
+  }
+}
+
+/* Projects Section */
+section.projects {
+  position: relative;
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 60px;
+  background-color: $moonblue;
+
+  .projectswrapper {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    // max-width: 960px;
+    max-width: 1440px;
+
+    h2 {
+      position: relative;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      font-family: $changa;
+      font-size: 64px;
+      font-weight: normal;
+      color: $deepblue;
+      text-align: center;
+      text-shadow: $dropshadow;
+      @include transition(all ease 0.5s);
+    }
+
+    .row:first-of-type {
+      margin-top: 20px;
+    }
+    .row {
+      position: relative;
+      @include flexbox();
+      @include flex-wrap(wrap);
+      @include justify-content(center);
+      @include transition(all ease 0.5s);
+      width: 100%;
+
+      .column {
+        position: relative;
+        @include flex(auto);
+        width: 285px;
+        height: 400px;
+        max-width: 285px;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 12.5px;
+        margin-bottom: 12.5px;
+        background: $white;
+        @include box-shadow($dropshadow);
+        @include transition(all ease 0.5s);
+
+        .title {
+          height: 100px;
+          width: 100%;
+          @include background-size(cover);
+          h3 {
+            padding-top: 13px;
+            font-family: $changa;
+            font-weight: normal;
+            color: $white;
+            text-shadow: $dropshadow;
+            text-align: center;
+          }
+        }
+        .description {
+          p {
+            margin: 10px;
+            font-size: 15px;
+            font-weight: 400;
+            color: $deepblue;
+          }
+        }
+        .viewlink {
+          position: absolute;
+          bottom: 10px;
+          right: 10px;
+          width: 135px;
+          a {
+            text-decoration: none;
+            .view {
+              position: relative;
+              padding-top: 12px;
+              width: 135px;
+              height: 30px;
+              border-radius: 5px;
+              background: $brown;
+              font-size: 15px;
+              color: $white;
+              text-align: center;
+              @include transition(all ease 0.5s);
+            }
+          }
+
+          /* When git/figma link is hovered, add background color and font color */
+          a:hover {
+            .view {
+              background: $gray;
+              color: $deepblue;
+              @include transform(scale(1.1));
+            }
+          }
+        }
+      }
+
+      // Every project
+      .project {
+        .title {
+          // background: $ashblue;
+          h3 {
+            font-size: 30px;
+          }
+        }
+      }
+      /* List of Projects */
+      .project1 {
+        .title {
+          background: $ashblue;
+          h3 {
+            font-size: 34px;
+          }
+        }
+      }
+      .project2 {
+        .title {
+          background: $deepblue;
+        }
+      }
+      .project3 {
+        .title {
+          background: $brown;
+        }
+      }
+      .project4 {
+        .title {
+          background: $ashblue;
+        }
+      }
+      .project5 {
+        .title {
+          background: $deepblue;
+        }
+      }
+      .project6 {
+        .title {
+          background: $brown;
+        }
+      }
+      .project7 {
+        .title {
+          background: $ashblue;
+          h3 {
+            font-size: 32px;
+          }
+        }
+      }
+      .project8 {
+        .title {
+          background: $deepblue;
+          h3 {
+            font-size: 36px;
+          }
+        }
+      }
+      .project9 {
+        .title {
+          background: $brown;
+          h3 {
+            font-size: 38px;
+          }
+        }
+      }
+      .project10 {
+        .title {
+          background: $ashblue;
+        }
+      }
+      .project11 {
+        .title {
+          background: $deepblue;
+          h3 {
+            font-size: 38px;
+          }
+        }
+      }
+      .project12 {
+        .title {
+          background: $brown;
+          h3 {
+            font-size: 32px;
+          }
+        }
+      }
+      .project13 {
+        .title {
+          background: $ashblue;
+          h3 {
+            font-size: 36px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Resume Section */
+section.resume {
+  position: relative;
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 60px;
+  background-color: $white;
+  @include box-shadow($dropshadow);
+  z-index: 1;
+
+  .resumewrapper {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 960px;
+    text-align: center;
+
+    h2 {
+      position: relative;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 25px;
+      font-family: $changa;
+      font-size: 64px;
+      font-weight: normal;
+      color: $deepblue;
+      text-align: center;
+      text-shadow: $dropshadow;
+      @include transition(all ease 0.5s);
+    }
+
+    .resumebuttons {
+      margin-left: auto;
+      margin-right: auto;
+      @include flexbox();
+      @include flex-wrap(wrap);
+      @include justify-content(center);
+
+      button:focus {
+        outline: 0;
+      }
+      button[type="button"] {
+        @include flex(auto);
+        position: relative;
+        width: 200px;
+        max-width: 200px;
+        max-width: 200px;
+        height: 80px;
+        margin: 10px;
+        border: none;
+        border-radius: 15px;
+        background-color: $brown;
+        color: $white;
+        font-family: $changa;
+        font-size: 36px;
+        font-weight: normal;
+        @include box-shadow($dropshadow);
+        cursor: pointer;
+        @include transition(all ease 0.5s);
+
+        .fa {
+          padding-right: 5px;
+        }
+      }
+
+      /* When moving the mouse over the submit button, add a background and font color */
+      button[type="button"]:hover {
+        background-color: $gray;
+        color: $deepblue;
+        @include transform(scale(1.1));
+      }
+    }
+  }
+}
+
+/* Contact Me Section */
+section.contact {
+  position: relative;
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 60px;
+  background-color: $ashblue;
+
+  .contactwrapper {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 960px;
+
+    h2 {
+      position: relative;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      font-family: $changa;
+      font-size: 64px;
+      font-weight: normal;
+      color: $deepblue;
+      text-align: center;
+      text-shadow: $dropshadow;
+      @include transition(all ease 0.5s);
+    }
+
+    .contactform {
+      position: relative;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+
+      form {
+        position: relative;
+        width: 100%;
+        margin-top: 25px;
+        text-align: center;
+
+        input[type="text"] {
+          width: 100%;
+          height: 45px;
+          padding: 12px;
+          border: 1px solid $gray;
+          border-radius: 4px;
+          box-sizing: border-box;
+          margin-bottom: 15px;
+          resize: vertical; /* Allow the user to vertically resize the textarea (not horizontally) */
+          font-size: 16px;
+          color: $deepblue;
+          @include box-shadow($dropshadow);
+          @include transition(all ease 0.5s);
+        }
+
+        textarea {
+          width: 100%;
+          height: 200px;
+          padding: 12px;
+          border: 1px solid $gray;
+          border-radius: 4px;
+          box-sizing: border-box;
+          margin-bottom: 15px;
+          font-size: 16px;
+          color: $deepblue;
+          @include box-shadow($dropshadow);
+          @include transition(all ease 0.5s);
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+          box-shadow: 0 0 5px $deepblue;
+          border: 1px solid $deepblue;
+        }
+
+        button:focus {
+          outline: 0;
+        }
+        button[type="submit"] {
+          position: relative;
+          width: 200px;
+          height: 80px;
+          margin-top: 5px;
+          border: none;
+          border-radius: 15px;
+          background-color: $brown;
+          color: $white;
+          font-family: $changa;
+          font-weight: normal;
+          font-size: 36px;
+          @include box-shadow($dropshadow);
+          cursor: pointer;
+          @include transition(all ease 0.5s);
+
+          /* Add some padding to font awesome */
+          .fa {
+            padding-left: 5px;
+          }
+        }
+
+        /* When moving the mouse over the submit button, add a background and font color */
+        button[type="submit"]:hover {
+          background-color: $gray;
+          color: $deepblue;
+          @include transform(scale(1.1));
+        }
+
+        /* Add a background color and some padding around the form */
+        .container {
+          border-radius: 5px;
+          background-color: #f2f2f2;
+          padding: 20px;
+        }
+      }
+    }
+  }
+}
+
+/* Footer Section */
+section.footer {
+  position: relative;
+  width: 100%;
+  padding-top: 25px;
+  padding-bottom: 20px;
+  background-color: $deepblue;
+
+  .footerwrapper {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 960px;
+
+    h4 {
+      position: relative;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 30px;
+      font-family: $changa;
+      font-size: 36px;
+      font-weight: normal;
+
+      text-align: center;
+      text-shadow: $dropshadow;
+
+      a {
+        text-decoration: none;
+        color: $white;
+      }
+      .fa {
+        padding-left: 5px;
+      }
+    }
+
+    .logo {
+      display: block;
+      position: relative;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 5px;
+      height: 70px;
+      width: auto;
+      @include transition(all ease 0.5s);
+    }
+
+    p {
+      display: block;
+      position: relative;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 14px;
+      color: $white;
+      text-align: center;
+      text-shadow: $dropshadow;
+
+      a {
+        font-size: 14px;
+        color: $white;
+        text-shadow: $dropshadow;
+      }
+    }
+  }
+}
+
+/* All Media Queries */
+@import "responsive"; /* CSS for all Media Queries */

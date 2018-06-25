@@ -1,0 +1,107 @@
+/*
+*   Mixin for Cross-browser Background Size
+*/
+@mixin background-size($value) {
+    -webkit-background-size: $value;
+    -moz-background-size: $value;
+    -o-background-size: $value;
+    background-size: $value;
+}
+
+/*
+*   Mixin for Cross-browser Border Radius
+*/
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    border-radius: $radius;
+    background-clip: padding-box;  /* stops bg color from leaking outside the border: */
+}
+
+/*
+*   Mixin for Cross-browser Transition
+*/
+@mixin transition($value) {
+    -webkit-transition: $value;
+    -moz-transition: $value;
+    -ms-transition: $value;
+    -o-transition: $value;
+    transition: $value;
+}
+
+/*
+*   Mixin for Cross-browser Transform
+*/
+@mixin transform($value) {
+    -ms-transform: $value;
+    -webkit-transform: $value;
+    transform: $value;
+}
+
+/*
+*   Mixins for Cross-browser Box Shadow
+*/
+@mixin box-shadow($value) {
+    -webkit-box-shadow: $value;
+    -moz-box-shadow: $value;
+    box-shadow: $value;
+}
+
+/*
+*   Mixin for Box Color Scheme Mixins
+*/
+@mixin box_color($background) {
+    @if $background == $trueblue {
+        background: $trueblue;
+        color: $deepblue;
+    }
+    @else if $background == $ashblue {
+        background: $ashblue;
+        color: $deepblue;
+    }
+    @else if $background == $deepblue {
+        background: $deepblue;
+        color: $white;
+    }
+    @else if $background == $brown {
+        background: $brown;
+        color: $white;
+    }
+}
+
+/*
+*   Mixin for Box Color and Font Color
+*/
+@mixin box_theme($className) {
+    /* Determine Class Count */
+    $class_count: 0;
+    @if $className == 'tech' {
+        $class_count: $tech_count;
+    }
+    @else if $className == 'social' {
+        $class_count: $social_count;
+    }
+
+    /* Loop through Classes */
+    @for $i from 1 through $class_count {
+        @if $i % 4 == 1 {
+            .#{$className}#{$i} {
+                @include box_color($ashblue);
+            }
+        }
+        @else if $i % 4 == 2 {
+            .#{$className}#{$i} {
+                @include box_color($trueblue);
+            }
+        }
+        @else if $i % 4 == 3 {
+            .#{$className}#{$i} {
+                @include box_color($deepblue);
+            }
+        }
+        @else if $i % 4 == 0 {
+            .#{$className}#{$i} {
+                @include box_color($brown);
+            }
+        }
+    }
+}
